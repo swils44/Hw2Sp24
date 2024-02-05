@@ -34,24 +34,39 @@ def MakeDiagDom(Aaug):
     return Aaug
 
 def main():
-    # Example usage:
+    # 4x4 A Matrix:
     A = [[1, -10, 2, 4],
          [3, 1, 4, 12],
          [9, 2, 3, 4],
          [-1, 2, 7, 3]]
-
+    # 1x4 b matrix
     b = [2, 12, 21, 37]
-
+    # 3x3 C matrix
+    C = [[3, 1, -1],
+         [1, 4, 1],
+         [2, 1, 2]]
+    # 1x3 d matrix
+    d = [2, 12, 10]
+    # creates the augmented matrices
     Aaug = [row + [bi] for row, bi in zip(A, b)]
+    Caug = [row + [dj] for row, dj in zip(C, d)]
+    # creates the initial guess matrix for gauss seidel
     x_initial_guess = [0.0] * len(b)
-
+    x_initial_guess2 = [0.0] * len(d)
     # Make the matrix diagonally dominant
     Aaug = MakeDiagDom(Aaug)
-
+    Caug = MakeDiagDom(Caug)
     # Solve using Gauss-Seidel
     solution = GaussSeidel(Aaug, x_initial_guess)
+    solution2 = GaussSeidel(Caug, x_initial_guess2)
+    # Print output to Console
+    for i in range(len(solution2)):
+        solution2[i] = round(solution2[i])
+    for j in range(len(solution)):
+        solution[j] = round(solution[j])
 
-    print("Solution:", solution)
+    print("Solution to 3x3 matrix: ", solution2)
+    print("Solution to 4x4 matrix: ", solution)
 
 if __name__ == "__main__":
     main()
