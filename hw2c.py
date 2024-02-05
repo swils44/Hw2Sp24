@@ -13,6 +13,7 @@ def GaussSeidel(Aaug, x, Niter=15):
     for k in range(Niter):
         x_old = deepcopy(x)
 
+        # Update each element of x using the Gauss-Seidel formula
         for i in range(n):
             sigma = sum(Aaug[i][j] * x[j] for j in range(n) if j != i)
             x[i] = (Aaug[i][-1] - sigma) / Aaug[i][i]
@@ -27,6 +28,7 @@ def MakeDiagDom(Aaug):
     """
     n = len(Aaug)
 
+    # Iterate through rows to make the matrix diagonally dominant
     for i in range(n):
         max_row = max(range(i, n), key=lambda j: abs(Aaug[j][i]))
         Aaug[i], Aaug[max_row] = Aaug[max_row], Aaug[i]

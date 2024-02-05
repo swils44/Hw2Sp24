@@ -43,6 +43,11 @@ def example_function(x):
     return x - 3*math.cos(x)
 
 def main():
+    """
+    sets initial x0 and x1 and calls secant function with a callback to example_function for the function that we are
+    using the secant method on
+    :return: estimated root
+    """
     # Initial guesses
     x0 = 1.0
     x1 = 2.0
